@@ -2,9 +2,16 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import userRoutes from './routes/user.route.js'
-import authRoutes from './routes/auth.route.js'
+import cors from 'cors'
 
 dotenv.config()
+
+const app = express();
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true, // If your frontend sends credentials (like cookies)
+}));
 
 mongoose.connect(process.env.MONGODB_URL).then(()=>{
     console.log("mongodb connected");
@@ -13,15 +20,14 @@ mongoose.connect(process.env.MONGODB_URL).then(()=>{
     console.log('mongodb error:'+err);
 }) 
 
-const app = express();
+
 app.use(express.json())
 
-app.listen(5000,()=>{
-    console.log('Server listening on port 5000!!!');
+app.listen(8000,()=>{
+    console.log('Server listening on port 8000!!!');
 }) 
 
 app.use('/api/user',userRoutes)
-app.use('/api/auth',authRoutes)
 app.use((err,req,res,next)=>{
     const statusCode = err.statusCode || 500
     const message = err.message || "Internal Server Error"
