@@ -12,7 +12,6 @@ const SignUp = () => {
   const [validateErrors, setValidateErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -25,12 +24,13 @@ const SignUp = () => {
     if (Object.keys(formErrors).length == 0) {
       setLoading(true);
       try {
-        const response = await axios.post("/auth/signup", {
+        const response = await axios.post("/user/signup", {
           username: formData.username,
           email: formData.email,
           password: formData.password,
         });
-        console.log(response.data);
+        const data = await response.data
+        console.log("12345"+JSON.stringify(data));
         if (response.data.message == "create successfully") {
           toast.success("Sign Up success!");
           setTimeout(() => {
