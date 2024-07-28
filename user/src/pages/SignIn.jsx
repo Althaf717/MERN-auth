@@ -29,13 +29,7 @@ const SignIn = () => {
           email: formData.email,
           password: formData.password,
         });
-        if (response.data.message == "create successfully") {
-          toast.success("Sign In success!");
-          setTimeout(() => {
-            setLoading(false);
-            navigate("/");
-          }, 2000);
-        }
+        toast.success("Sign In success!");
         setTimeout(() => {
           setLoading(false);
           navigate("/");
@@ -44,7 +38,6 @@ const SignIn = () => {
       } catch (err) {
         console.log(err);
         setLoading(false);
-        // toast.error(err.response.data);
         toast.error(err.response?.data?.message || "An error occurred");
       }
     }
