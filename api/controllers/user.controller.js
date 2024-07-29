@@ -39,8 +39,8 @@ export const signin = async (req,res,next)=>{
         // res.cookie('access_token',token,{httpOnly:true,sameSite: 'Strict',secure:true, expires:expiryDate}).status(200).json(rest)
         res.cookie('access_token', token, {
             httpOnly: true,
-            sameSite: 'Strict',  // Consider 'Lax' or 'None' if required
-            secure: true,  // Ensure HTTPS
+            sameSite: 'Lax',  // Consider 'Lax' or 'None' if required
+            secure: false,  // Ensure HTTPS
             expires: expiryDate
         });
         res.status(200).json(rest);

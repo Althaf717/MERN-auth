@@ -3,17 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "../axios";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
-
-
+import { signInStart,signInSuccess,signInFailure } from "../redux/user/userSlice";
+import {useDispatch, useSelector} from 'react-redux'
 
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
   const [validateErrors, setValidateErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  const {loading, error} = useSelector((state)=>state.user)
 
 
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -23,21 +24,22 @@ const SignIn = () => {
     e.preventDefault();
     const formErrors = validate(formData);
     if (Object.keys(formErrors).length == 0) {
-      setLoading(true);
+      // setLoading(true);
+      dispatch(signInStart());
       try {
         const response = await axios.post("/user/signin", {
           email: formData.email,
           password: formData.password,
         });
+        const data = response.data
         toast.success("Sign In success!");
         setTimeout(() => {
-          setLoading(false);
+          dispatch(signInSuccess(data));
           navigate("/");
         }, 2000);
         
       } catch (err) {
-        console.log(err);
-        setLoading(false);
+        dispatch(signInFailure(err))
         toast.error(err.response?.data?.message || "An error occurred");
       }
     }
