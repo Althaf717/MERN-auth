@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         require:true
+    },
+    profilePicture:{
+        type:String,
+        default:"https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-user-2264922221"
     }
 },{timestamps:true});
 

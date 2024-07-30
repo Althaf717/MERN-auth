@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "../axios";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
+import Oauth from "../components/Oauth";
 
 
 
@@ -125,6 +126,7 @@ const SignUp = () => {
             sign up
           </button>
         )}
+        <Oauth/>
       </form>
       <div className="flex mt-4 gap-2">
         <p>Have an Account?</p>

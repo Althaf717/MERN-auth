@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
 import { signInStart,signInSuccess,signInFailure } from "../redux/user/userSlice";
 import {useDispatch, useSelector} from 'react-redux'
+import Oauth from "../components/Oauth";
 
 
 const SignIn = () => {
@@ -103,7 +104,9 @@ const SignIn = () => {
             {" "}
             sign in
           </button>
+          
         )}
+        <Oauth/>
       </form>
       <div className="flex mt-4 gap-2">
         <p>Dont have an Account?</p>
