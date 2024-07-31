@@ -17,6 +17,7 @@ const Oauth = () => {
                 email:result.user.email,
                 photo:result.user.photoURL
             },{withCredentials:true})
+            console.log(response.data);
             dispatch(signInSuccess(response.data))
         } catch (error) {
             console.log("google auth error",error);
