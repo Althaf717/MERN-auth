@@ -31,6 +31,8 @@ const SignIn = () => {
         const response = await axios.post("/user/signin", {
           email: formData.email,
           password: formData.password,
+        }, {
+          withCredentials: true
         });
         const data = response.data
         toast.success("Sign In success!");
