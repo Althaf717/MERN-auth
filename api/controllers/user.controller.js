@@ -34,7 +34,6 @@ export const signin = async (req, res, next) => {
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     const { password: hashedPassword, ...rest } = validUser._doc;
     const expiryDate = new Date(Date.now() + 3600000);
-    // res.cookie('access_token',token,{httpOnly:true,sameSite: 'Strict',secure:true, expires:expiryDate}).status(200).json(rest)
     res.cookie("access_token", token, {
       httpOnly: true,
       sameSite: "Lax", // Consider 'Lax' or 'None' if required
@@ -69,7 +68,7 @@ export const google = async (req, res, next) => {
         username: req.body.name.split(" ").join("").toLowerCase() + Math.floor(Math.random() * 1000).toString(),
         email: req.body.email,
         password: hashedPassword,
-        profilePhoto: req.body.photo,
+        profilePicture: req.body.photo,
       });
       await newuser.save();
       const token = jwt.sign({ id: newuser._id }, process.env.JWT_SECRET);
@@ -86,3 +85,51 @@ export const google = async (req, res, next) => {
     next(error);
   }
 };
+
+
+export const signout = (req, res) => {
+  res.clearCookie('access_token').status(200).json('Signout success!');
+};
+
+
+
+export const updateUser = async (req, res, next) => {
+  if (req.user.id !== req.params.id) {
+    return next(errorHandler(401, 'You can update only your account!'));
+  }
+  try {
+    if (req.body.password) {
+      req.body.password = bcrypt.hashSync(req.body.password, 10);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          username: req.body.username,
+          email: req.body.email,
+          password: req.body.password,
+          profilePicture: req.body.profilePicture,
+        },
+      },
+      { new: true }
+    );
+    const { password, ...rest } = updatedUser._doc;
+    res.status(200).json(rest);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteUser = async (req, res, next) => {
+  if (req.user.id !== req.params.id) {
+    return next(errorHandler(401, 'You can delete only your account!'));
+  }
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json('User has been deleted...');
+  } catch (error) {
+    next(error);
+  }
+
+}
