@@ -1,16 +1,30 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+// import { defineConfig } from 'vite'
+// import react from '@vitejs/plugin-react-swc'
+
+// // https://vitejs.dev/config/
+// export default defineConfig({
+//   plugins: [react()],
+//   server: {
+//     proxy: {
+//       '/api': {
+//         target:'http://localhost:8000',
+//         changeOrigin:true
+//       }
+//     }
+//   }
+// })
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
   server: {
-    port:3000,
     proxy: {
-      '/api': {
-        target:'http://localhost:8000',
-        changeOrigin:true
-      }
-    }
-  }
-})
+      "/api": {
+        target: "http://localhost:8000",
+        secure: false,
+      },
+    },
+  },
+  plugins: [react()],
+});
