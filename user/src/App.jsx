@@ -9,6 +9,7 @@ import Header from './components/Header';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './components/PrivateRoute';
+import AdminSignIn from './pages/AdminSignIn';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
         </Route>
+        <Route path="/admin" element={<AdminSignIn />} />
       </Routes>
     </Router>
   );
