@@ -4,9 +4,13 @@ import { app } from '../firabase'
 import axios from "../axios.js";
 import { useDispatch } from "react-redux";
 import { signInSuccess } from '../redux/user/userSlice.js';
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const Oauth = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const handleGoogleClick = async () =>{
         try {
             const provider = new GoogleAuthProvider()
@@ -19,8 +23,11 @@ const Oauth = () => {
             },{withCredentials:true})
             console.log(response.data);
             dispatch(signInSuccess(response.data))
+            navigate('/')
+            toast.success("Google authentication success!");
         } catch (error) {
             console.log("google auth error",error);
+            toast.error('Something went wrong!')
         }
     }
   return (

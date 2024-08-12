@@ -18,6 +18,7 @@ import {
   deleteUserFailure,
   signOut,
 } from '../redux/user/userSlice';
+import { toast } from "react-toastify";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function Profile() {
   const [imagePercent, setImagePercent] = useState(0);
   const [imageError, setImageError] = useState(false);
   const [formData, setFormData] = useState({});
-  const [updateSuccess, setUpdateSuccess] = useState(false);
+  // const [updateSuccess, setUpdateSuccess] = useState(false);
 
   const { currentUser, loading, error } = useSelector((state) => state.user);
 
@@ -68,22 +69,16 @@ export default function Profile() {
     e.preventDefault();
     try {
       dispatch(updateUserStart());
-      // const { data } = await axios.post(`/user/update/${currentUser._id}`, formData);
-      const { data } = await axios.post(`/user/update/${currentUser._id}`, formData, {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        withCredentials: true, // Moved inside the same config object
-    });
-
+      const { data } = await axios.post(`/user/update/${currentUser._id}`, formData);
       if (data.success === false) {
         dispatch(updateUserFailure(data));
         return;
       }
       dispatch(updateUserSuccess(data));
-      setUpdateSuccess(true);
+      toast.success('User is updated successfully!')
     } catch (error) {
       dispatch(updateUserFailure(error));
+      toast.error('Something went wrong!')
     }
   };
 
@@ -96,8 +91,10 @@ export default function Profile() {
         return;
       }
       dispatch(deleteUserSuccess(data));
+      toast.success('Successfully Deleted')
     } catch (error) {
       dispatch(deleteUserFailure(error));
+      toast.error('Something went wrong!')
     }
   };
 
@@ -105,6 +102,7 @@ export default function Profile() {
     try {
       await axios.post('/user/signout',{},{withCredentials:true});
       dispatch(signOut());
+      toast.success("Sign Out success!");
     } catch (error) {
       console.log(error);
     }
@@ -181,10 +179,6 @@ export default function Profile() {
           Sign out
         </span>
       </div>
-      <p className='text-red-700 mt-5'>{error && 'Something went wrong!'}</p>
-      <p className='text-green-700 mt-5'>
-        {updateSuccess && 'User is updated successfully!'}
-      </p>
     </div>
   );
 }

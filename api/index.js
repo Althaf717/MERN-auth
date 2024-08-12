@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import userRoutes from './routes/user.route.js'
 import cors from 'cors'
+import cookieParser from "cookie-parser";
 
 dotenv.config()
 
@@ -22,6 +23,8 @@ mongoose.connect(process.env.MONGODB_URL).then(()=>{
 
 
 app.use(express.json())
+app.use(express.urlencoded({extended:true}));
+app.use(cookieParser())
 
 app.listen(8000,()=>{
     console.log('Server listening on port 8000!!!');
