@@ -47,6 +47,7 @@ const EditUser = () => {
         setImageError(true);
       },
       () => {
+        setImageError(false);
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
           setFormData({ ...formData, profilePicture: downloadURL }),
           setIsBtnDisabled(false)

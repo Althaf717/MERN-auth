@@ -106,3 +106,31 @@ export const adminsignin = async (req, res, next) => {
     res.status(500).json(err.message);
   }
   }
+
+
+
+  export const addUser = async(req,res)=>{
+    const { username, email, password, profilePicture } = req.body;
+
+  try {
+    const userExists = await User.findOne({ email });
+
+    if (userExists) {
+      res.status(400);
+      throw new Error("User already exists");
+    }
+    const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+    
+    const newUser = await User.create({
+      username: username,
+      email: email,
+      password: hashedPassword,
+      profilePicture: profilePicture,
+    });
+    await newUser.save();
+    res.json('successfully added');
+  } catch (err) {
+    res.json(err.message);
+    console.log(err);
+  }
+  }

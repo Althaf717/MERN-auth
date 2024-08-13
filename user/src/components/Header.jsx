@@ -13,7 +13,7 @@ const Header = () => {
   </h1>
 </Link>
         <ul className="flex gap-4">
-          <Link to={currentUser?.__v === 1 ? "/add-user" : "/"}>
+          <Link to={currentUser?.__v === 1 ? "/admin/add_user" : "/"}>
             <li>{currentUser?.__v === 1 ? "Add User" : "Home"}</li>
           </Link>
           <Link to={currentUser?.__v === 1 ? "" : "/about"}>

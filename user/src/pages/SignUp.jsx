@@ -31,7 +31,6 @@ const SignUp = () => {
           password: formData.password,
         });
         const data = await response.data
-        console.log("12345"+JSON.stringify(data));
         if (response.data.message == "create successfully") {
           toast.success("Sign Up success!");
           setTimeout(() => {
@@ -43,7 +42,6 @@ const SignUp = () => {
       } catch (err) {
         console.log(err);
         setLoading(false);
-        // toast.error(err.response.data);
         toast.error(err.response?.data?.message || "An error occurred");
       }
     }
