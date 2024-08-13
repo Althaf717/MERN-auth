@@ -52,3 +52,33 @@ export const adminsignin = async (req, res, next) => {
     }
   };
   
+
+  export const getUserDataById = async(req,res)=>{
+    const { id } = req.params;
+  try {
+    //console.log(id);
+    const user = await User.findOne({ _id: id });
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      throw new Error("User Not found!");
+    }
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+  }
+
+
+  export const deleteUserById = async(req,res)=>{
+    const { id } = req.params;
+  try {
+    const deleteUser = await User.deleteOne({ _id: id });
+    if (deleteUser) {
+      res.status(200).json({ message: "User account deleted successfully" });
+    } else {
+      throw new Error("Cannot delete user account!");
+    }
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+  }

@@ -70,7 +70,7 @@ const SignInComponent = ({ admin }) => {
         toast.success("Sign In success!");
         setTimeout(() => {
           dispatch(signInSuccess(data));
-          navigate("/admin-dashboard");
+          navigate("/admin/dashboard");
         }, 2000);
       } catch (err) {
         dispatch(signInFailure(err));

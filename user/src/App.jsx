@@ -13,6 +13,8 @@ import AdminSignIn from './pages/AdminSignIn';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminRoute from './components/AdminRoute';
 import HideRoute from './components/HideRoute';
+import EditUser from './pages/EditUser';
+import AddUser from './pages/AddUser';
 
 function App() {
   return (
@@ -35,7 +37,9 @@ function App() {
         </Route>
 
         <Route element={<AdminRoute />}>
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path='/admin/edit_user/:id' element={<EditUser/>} />
+          <Route path='/admin/add_user' element={<AddUser/>} />
         </Route>
 
       </Routes>

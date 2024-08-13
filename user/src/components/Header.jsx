@@ -7,9 +7,9 @@ const Header = () => {
   return (
     <div className="bg-gray-400">
       <div className="flex justify-between p-3 max-w-6xl mx-auto items-center">
-      <Link to={currentUser?.__v === 1 ? "/admin-dashboard" : "/"}>
+      <Link to={currentUser?.__v === 1 ? "/admin/dashboard" : "/"}>
   <h1 className="font-bold">
-    {currentUser?.__v === 1 ? "Admin Dashboard" : "Auth app"}
+    {currentUser?.__v === 1 ? "Admin" : "Auth app"}
   </h1>
 </Link>
         <ul className="flex gap-4">

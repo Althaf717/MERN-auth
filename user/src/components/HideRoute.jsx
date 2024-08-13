@@ -10,7 +10,7 @@ const HideRoute = () => {
   ) : currentUser?.__v == 0 ? (
     <Navigate to="/" />
   ) : (
-    <Navigate to="admin-dashboard" />
+    <Navigate to="admin/dashboard" />
   );
 };
 
