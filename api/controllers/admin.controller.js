@@ -82,3 +82,27 @@ export const adminsignin = async (req, res, next) => {
     res.status(500).json(err.message);
   }
   }
+
+  
+  export const updateUserById = async(req,res)=>{
+    const { id } = req.params;
+  try {
+    const user = await User.findOne({ _id: id });
+    user.username = req.body.username || user.username;
+    user.email = req.body.email || user.email;
+    user.profilePicture = req.body.profilePicture || user.profilePicture
+    if (req.body.password) {
+      const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+      user.password = hashedPassword;
+    }
+
+    const updatedUser = await user.save();
+    if (updatedUser) {
+      res.status(200).json(user);
+    } else {
+      throw new Error("Cannot Update this account");
+    }
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+  }
