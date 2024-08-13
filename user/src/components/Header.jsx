@@ -7,15 +7,17 @@ const Header = () => {
   return (
     <div className="bg-gray-400">
       <div className="flex justify-between p-3 max-w-6xl mx-auto items-center">
-        <Link to="/">
-          <h1 className="font-bold">Auth app</h1>
-        </Link>
+      <Link to={currentUser?.__v === 1 ? "/admin-dashboard" : "/"}>
+  <h1 className="font-bold">
+    {currentUser?.__v === 1 ? "Admin Dashboard" : "Auth app"}
+  </h1>
+</Link>
         <ul className="flex gap-4">
-          <Link to="/">
-            <li>Home</li>
+          <Link to={currentUser?.__v === 1 ? "/add-user" : "/"}>
+            <li>{currentUser?.__v === 1 ? "Add User" : "Home"}</li>
           </Link>
-          <Link to="/about">
-            <li>About</li>
+          <Link to={currentUser?.__v === 1 ? "" : "/about"}>
+            <li>{currentUser?.__v === 1 ? "" : "About"}</li>
           </Link>
           <Link to="/profile">
             {currentUser ? (

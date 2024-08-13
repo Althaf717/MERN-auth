@@ -52,7 +52,32 @@ const SignInComponent = ({ admin }) => {
     }
   };
 
-  const handleAdminSubmit = async (e) => {};
+  const handleAdminSubmit = async (e) => {
+    e.preventDefault();
+    const formErrors = validate(formData);
+    if (Object.keys(formErrors).length == 0) {
+      dispatch(signInStart());
+      try {
+        const response = await axios.post(
+          "/admin/signin",
+          formData,
+          {
+            withCredentials: true,
+          }
+        );
+        const data = response.data;
+        console.log(data);
+        toast.success("Sign In success!");
+        setTimeout(() => {
+          dispatch(signInSuccess(data));
+          navigate("/admin-dashboard");
+        }, 2000);
+      } catch (err) {
+        dispatch(signInFailure(err));
+        toast.error(err.response?.data?.message || "An error occurred");
+      }
+    }
+  };
 
   const validate = (formDatas) => {
     const formErrors = {};
