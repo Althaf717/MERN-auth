@@ -48,7 +48,8 @@ const EditUser = () => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-          setFormData({ ...formData, profilePicture: downloadURL })
+          setFormData({ ...formData, profilePicture: downloadURL }),
+          setIsBtnDisabled(false)
         );
       }
     );
@@ -103,7 +104,7 @@ const EditUser = () => {
             {
               <img
                 className="object-cover h-60 min-w-60 mx-auto rounded-md cursor-pointer"
-                src={user.profilePicture}
+                src={formData.profilePicture || user.profilePicture}
                 alt="profilepicture"
                 onClick={() => fileRef.current.click()}
               />
