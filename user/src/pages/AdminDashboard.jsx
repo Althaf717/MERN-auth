@@ -33,7 +33,7 @@ const AdminDashboard = () => {
                   type="searchName"
                   onChange={(e)=>setSearchName(e.target.value)}
                   placeholder="Search user"
-                  className="w-full bg-[#ffffff0f] border-1 border-slate-500 px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:border-blue-500"
+                  className="w-full bg-[#0b0b0b2d] border-1 border-black px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:border-black"
                 />
               </div>
         </div>

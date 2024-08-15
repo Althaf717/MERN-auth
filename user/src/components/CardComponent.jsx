@@ -31,7 +31,7 @@ export default function CardComponent({user,setDeleteUser}) {
         onClick={handleNavigate}
       /> 
       }
-      <CardContent className='bg-slate-700 text-white' >
+      <CardContent className='bg-gray-900 text-white' >
         <Typography className='sm:' gutterBottom variant="" component="div">
           {user&&user.username}
         </Typography>
@@ -43,8 +43,8 @@ export default function CardComponent({user,setDeleteUser}) {
         </p>
       </CardContent>
       <CardActions className='flex justify-between bg-slate-700' >
-        <Button onClick={handleNavigate}  size="small">Edit User</Button>
-        <Button onClick={()=>setOpen(true)} variant='text' color='info' size="small">Delete</Button>
+        <Button onClick={handleNavigate}  color='primary' size="small">Edit User</Button>
+        <Button onClick={()=>setOpen(true)} variant='text' color='error' size="small">Delete</Button>
       </CardActions>
       <DialogComponent setDeleteUser={setDeleteUser} userId={user._id} open={open} setOpen={setOpen} />
     </Card>

@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "../axios";
 import { toast } from "react-toastify";
-import Button from "@mui/material/Button";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { ClipLoader } from "react-spinners";
 import {
   getDownloadURL,
@@ -75,7 +73,7 @@ const EditUser = () => {
   const handleSubmit = (e) => {
     setLoading(true);
     e.preventDefault();
-    //console.log(user._id);
+    
     axios
       .put(`/admin/edit_user/${userId.id}`, formData, { withCredentials: true })
       .then((res) => {
@@ -91,14 +89,6 @@ const EditUser = () => {
 
   return (
     <div className="m-4 sm:mx-5  md:mx-12 mt-12">
-      <Button
-        onClick={() => navigate("/admin/dashboard")}
-        variant="text"
-        color="info"
-        startIcon={<ArrowBackIcon />}
-      >
-        Dashboard
-      </Button>
       <div className=" w-full sm:w-full md:w-full  mt-10">
         <div className="flex  flex-wrap justify-center">
           <div className="h-60 m-2 w-full sm:w-60 ">
@@ -171,7 +161,7 @@ const EditUser = () => {
                 <button
                   disabled
                   type=""
-                  className="my-6 w-full rounded-md  bg-indigo-700 px-11 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="my-6 w-full rounded-md  bg-slate-700 px-11 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   {" "}
                   <ClipLoader color="white" size={13} className="mx-1" />{" "}
@@ -181,7 +171,7 @@ const EditUser = () => {
                 <button
                   disabled={isBtnDisabled ? true : false}
                   type="submit"
-                  className="my-6 disabled:bg-opacity-55 disabled:cursor-not-allowed  mb-4 w-full rounded-md bg-indigo-700 px-11 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="my-6 disabled:bg-opacity-55 disabled:cursor-not-allowed  mb-4 w-full rounded-md bg-slate-700 px-11 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Update Profile
                 </button>
